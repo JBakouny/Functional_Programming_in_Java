@@ -26,23 +26,25 @@ public class Task {
 //    sum(fact, a, b)
 //
 
-//    private static int mapReduce(int zero,
-//                          BiFunction<Integer, Integer, Integer> op,
-//                          Function<Integer, Integer> f,
-//                          int a,
-//                          int b) {
-//        while(a <= b) {
-//            zero = op.apply(zero, a);
-//            ++a;
-//        }
-//        return zero;
-//    }
+    private static int mapReduce(int zero,
+                          BiFunction<Integer, Integer, Integer> op,
+                          Function<Integer, Integer> f,
+                          int a,
+                          int b) {
+        while(a <= b) {
+            zero = op.apply(zero, f.apply(a));
+            ++a;
+        }
+        return zero;
+    }
 
-//    private static int product(Function<Integer, Integer> f,
-//                               int a,
-//                               int b) {
-//        return mapReduce(1, )
-//    }
+    private static int product(Function<Integer, Integer> f, int a, int b) {
+        if (a > b) {
+            return 1;
+        } else {
+            return a * product(f, a + 1, b);
+        }
+    }
 
     private static int sum(Function<Integer, Integer> f, int a, int b) {
         if (a > b) {
@@ -54,6 +56,10 @@ public class Task {
 
     public static int sumInts(int a, int b) {
         return sum(x -> x, a, b);
+    }
+
+    public static int fact(int n) {
+        return product(x -> x, 1, n);
     }
 
     public static int sumCube(int a, int b) {
